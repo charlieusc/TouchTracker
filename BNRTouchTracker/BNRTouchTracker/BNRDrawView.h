@@ -11,4 +11,6 @@
 
 @interface BNRDrawView : UIView
 
+- (BOOL)saveChanges;
+
 @end

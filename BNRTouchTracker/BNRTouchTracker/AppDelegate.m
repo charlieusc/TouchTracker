@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BNRDrawViewController.h"
+#import "BNRDrawView.h"
 
 @interface AppDelegate ()
 
@@ -34,8 +35,16 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    BNRDrawView *lineView = self.window.rootViewController.view;
+    if(lineView){
+        BOOL success = lineView.saveChanges;
+        if(success){
+            NSLog(@"Saved all of the BNRLine");
+        }else{
+            NSLog(@"Could not save any of the BNRLine");
+        }
+    }
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

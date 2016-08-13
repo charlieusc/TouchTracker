@@ -22,8 +22,12 @@
 {
     self = [super initWithFrame:frame];
     if(self){
+        NSString *path = [self lineArchivePath];
         self.linesInProgress = [[NSMutableDictionary alloc] init];
-        self.finishedLines = [[NSMutableArray alloc] init];
+        self.finishedLines = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+        if(!self.finishedLines){
+            self.finishedLines = [[NSMutableArray alloc] init];
+        }
         self.backgroundColor = [UIColor grayColor];
         self.multipleTouchEnabled = YES;
     }
@@ -112,6 +116,18 @@
 }
 
 
+- (NSString *)lineArchivePath
+{
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [documentDirectories firstObject];
+    return [documentDirectory stringByAppendingPathComponent:@"lines.archive"];
+}
+
+- (BOOL)saveChanges
+{
+    NSString *path = [self lineArchivePath];
+    return [NSKeyedArchiver archiveRootObject:self.finishedLines toFile:path];
+}
 
 
 
