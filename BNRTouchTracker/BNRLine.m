@@ -16,8 +16,10 @@
     if(self){
         NSValue *vBegin = [aDecoder decodeObjectForKey:@"begin"];
         NSValue *vEnd = [aDecoder decodeObjectForKey:@"end"];
+        UIColor *vColor = [aDecoder decodeObjectForKey:@"lineColor"];
         self.begin = [vBegin CGPointValue];
         self.end = [vEnd CGPointValue];
+        self.lineColor = vColor;
     }
     return self;
 }
@@ -28,6 +30,7 @@
     NSValue *vEnd = [NSValue valueWithCGPoint:self.end];
     [aCoder encodeObject:vBegin forKey:@"begin"];
     [aCoder encodeObject:vEnd forKey:@"end"];
+    [aCoder encodeObject:self.lineColor forKey:@"lineColor"];
 }
 
 @end

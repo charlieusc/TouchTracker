@@ -47,8 +47,9 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    [[UIColor blackColor] set];
+    
     for(BNRLine *line in self.finishedLines){
+        [line.lineColor set];
         [self strokeLine:line];
     }
     
@@ -96,6 +97,20 @@
     for(UITouch *t in touches){
         NSValue *key = [NSValue valueWithNonretainedObject:t];
         BNRLine *line = self.linesInProgress[key];
+        
+        float dx = line.end.x - line.begin.x;
+        float dy = (line.end.y - line.begin.y);
+        CGFloat theta;
+        if(dy == 0){
+            theta = M_PI/2;
+        }else{
+            theta = atanf(dx/dy);
+        }
+        if(theta<0) theta+=M_PI;
+        CGFloat paraR = sinf(theta);
+        CGFloat paraG = cosf(theta);
+        CGFloat paraB = 0.5;
+        line.lineColor = [UIColor colorWithRed:paraR green:paraG blue:paraB alpha:1];
         
         [self.finishedLines addObject:line];
         [self.linesInProgress removeObjectForKey:key];
