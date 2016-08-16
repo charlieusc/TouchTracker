@@ -23,7 +23,11 @@
     self.window.rootViewController = dvc;
     
     self.window.backgroundColor = [UIColor  whiteColor];
-    [self.window makeKeyWindow];
+    [self.window makeKeyAndVisible];
+    
+#ifdef VIEW_DEBUG
+    NSLog(@"%@", [self.window performSelector:@selector(recursiveDescription)]);
+#endif
     
     return YES;
 }

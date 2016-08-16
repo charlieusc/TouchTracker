@@ -62,6 +62,11 @@
     return NO;
 }
 
+- (void)swipeUp:(UISwipeGestureRecognizer *)gr
+{
+    
+}
+
 - (void)moveLine:(UIPanGestureRecognizer *)gr
 {
     if(self.selectedLine){
@@ -166,7 +171,8 @@
         [[UIColor whiteColor] set];
         [self strokeLine:self.pressSelectedLine];
     }
-    
+
+
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

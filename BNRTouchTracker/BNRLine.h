@@ -14,5 +14,4 @@
 @property (nonatomic) CGPoint begin;
 @property (nonatomic) CGPoint end;
 @property (nonatomic) float lineWidth;
-
 @end
